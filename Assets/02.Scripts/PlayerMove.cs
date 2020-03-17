@@ -27,9 +27,21 @@ public class PlayerMove : MonoBehaviour
 
         //Direction Sprite
         if (Input.GetButton("Horizontal"))
+         {
+             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
+         }
+       /* Vector3 moveVelocity = Vector3.zero;
+
+        if(Input.GetAxisRaw ("Horizontal") < 0)
         {
-            spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
+            moveVelocity = Vector3.left;
+            transform.localScale = new Vector3(-0.5f, 0.5f, 2); //Left Flip
         }
+        else if(Input.GetAxisRaw("Horizontal") > 0)
+        {
+            moveVelocity = Vector3.right;
+            transform.localScale = new Vector3(0.5f, 0.5f, 2); //Right Flip
+        } */
 
         //Stop Speed
         if (Input.GetButtonUp("Horizontal"))
@@ -56,9 +68,9 @@ public class PlayerMove : MonoBehaviour
             rigid.velocity = new Vector2(maxSpeed, rigid.velocity.y);
         if (rigid.velocity.x < maxSpeed*(-1)) //Left Max Speed
             rigid.velocity = new Vector2(maxSpeed * (-1), rigid.velocity.y);
-
+        
         //Landing Platform
-        if(rigid.velocity.y < 0)
+        if (rigid.velocity.y < 0)
         {
             Debug.DrawRay(rigid.position, Vector3.down*0.4f, new Color(0, 1, 0));
             RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 0.4f, LayerMask.GetMask("Platform"));
@@ -72,7 +84,7 @@ public class PlayerMove : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.layer == 10) //layer가 Enemy이면 
         {
             OnDamaged(collision.transform.position);
         }
