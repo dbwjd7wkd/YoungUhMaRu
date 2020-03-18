@@ -31,6 +31,13 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        Vector3 worldpos = Camera.main.WorldToViewportPoint(this.transform.position);
+        if (worldpos.x < 0f) worldpos.x = 0f;
+        if (worldpos.y < 0f) worldpos.y = 0f;
+        if (worldpos.x > 1f) worldpos.x = 1f;
+        if (worldpos.y > 1f) worldpos.y = 1f;
+        this.transform.position = Camera.main.ViewportToWorldPoint(worldpos);
+
         //Walk Animation
         if (Mathf.Abs(rigid.velocity.x) < 0.3)
             anim.SetBool("isWalking", false);
@@ -42,18 +49,6 @@ public class PlayerMove : MonoBehaviour
          {
              spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
          }
-       /* Vector3 moveVelocity = Vector3.zero;
-
-        if(Input.GetAxisRaw ("Horizontal") < 0)
-        {
-            moveVelocity = Vector3.left;
-            transform.localScale = new Vector3(-0.5f, 0.5f, 2); //Left Flip
-        }
-        else if(Input.GetAxisRaw("Horizontal") > 0)
-        {
-            moveVelocity = Vector3.right;
-            transform.localScale = new Vector3(0.5f, 0.5f, 2); //Right Flip
-        } */
 
         //Stop Speed
         if (Input.GetButtonUp("Horizontal"))
@@ -69,6 +64,7 @@ public class PlayerMove : MonoBehaviour
             anim.SetBool("isJumping", true);
         }
     }
+
     void FixedUpdate()
     {
         //Move Speed
