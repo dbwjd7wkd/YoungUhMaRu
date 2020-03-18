@@ -97,7 +97,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_renderer: {fileID: 6137497611716347377}
   m_meshFilter: {fileID: 1856640711349568622}
   m_TextComponent: {fileID: 7719824560353012249}
@@ -255,7 +255,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4363912725897056428, guid: 2605d61aefc594d4fa760d613e53b7b8, type: 2}
+  - {fileID: -1377447965147620300, guid: 12727b4c113b38e4995f939cc077f3bb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -312,8 +312,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Sample text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2605d61aefc594d4fa760d613e53b7b8, type: 2}
-  m_sharedMaterial: {fileID: 4363912725897056428, guid: 2605d61aefc594d4fa760d613e53b7b8,
+  m_fontAsset: {fileID: 11400000, guid: 12727b4c113b38e4995f939cc077f3bb, type: 2}
+  m_sharedMaterial: {fileID: -1377447965147620300, guid: 12727b4c113b38e4995f939cc077f3bb,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -380,13 +380,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 7719824560353012249}
-    characterCount: 11
+    characterCount: 0
     spriteCount: 0
-    spaceCount: 1
-    wordCount: 2
+    spaceCount: 0
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 2
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0

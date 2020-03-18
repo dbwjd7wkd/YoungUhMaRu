@@ -4707,7 +4707,7 @@ MonoBehaviour:
   distance: 0.5
   isLayer:
     serializedVersion: 2
-    m_Bits: 1536
+    m_Bits: 17920
 --- !u!58 &929292864
 CircleCollider2D:
   m_ObjectHideFlags: 0

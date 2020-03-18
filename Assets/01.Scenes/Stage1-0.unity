@@ -1201,6 +1201,12 @@ PrefabInstance:
         \uBE5B\uC758 \uD798\uC73C\uB85C \uB2E4\uC2A4\uB9AC\uB294\uB370, \uADF8 \uBE5B\uC774
         \uC5C6\uC73C\uBA74 \uC2DC\uAC04\uC5D0 \uD63C\uB3D9\uC774 \uC624\uAC8C \uB429\uB2C8\uB2E4."
       objectReference: {fileID: 0}
+    - target: {fileID: 5555172357888459142, guid: aeeede64e827a3e41b2ea3bd5186fcbd,
+        type: 3}
+      propertyPath: sentences.Array.data[2]
+      value: "\uBAAC\uC2A4\uD130\uB4E4\uC5D0\uAC8C\uC11C \uBE5B\uC758 \uD798\uC744
+        \uB2E4\uC2DC \uCC3E\uC544 \uBCC4\uC790\uB9AC\uB4E4\uC5D0\uAC8C \uAC16\uB2E4\uC8FC\uC138\uC694!"
+      objectReference: {fileID: 0}
     - target: {fileID: 5555172357888459145, guid: aeeede64e827a3e41b2ea3bd5186fcbd,
         type: 3}
       propertyPath: m_Name

@@ -23,6 +23,10 @@ public class OnClickNextScene : MonoBehaviour
     {
         SceneManager.LoadScene("Stage1-3");
     }
+    public void GoStage2()
+    {
+        SceneManager.LoadScene("Stage2");
+    }
 
     public void GoOutro()
     {

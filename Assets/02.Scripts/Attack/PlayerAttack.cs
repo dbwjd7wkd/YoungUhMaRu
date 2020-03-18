@@ -11,6 +11,7 @@ public class PlayerAttack : MonoBehaviour
     private float curtime;
     SpriteRenderer spriteRenderer;
 
+    public string key;
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -20,9 +21,12 @@ public class PlayerAttack : MonoBehaviour
     {
         if(curtime <= 0)
         {
-            if (Input.GetKey(KeyCode.Q) && gameObject.layer == 11)
+            key = Input.inputString;
+            //공격키 누르면 발사체 생성
+            if ((key == "q" || key == "w" || key == "e" || key == "r" || key == "a" || key == "s"
+                || key == "d" || key == "f" || key == "z" || key == "x" || key == "c" || key == "v") && gameObject.layer == 11)
             {
-                if(spriteRenderer.flipX == false)
+                if (spriteRenderer.flipX == false)
                 {
                     Instantiate(Light_Attack, posRight.position, posRight.transform.rotation);
                 }

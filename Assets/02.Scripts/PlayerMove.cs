@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -9,6 +10,17 @@ public class PlayerMove : MonoBehaviour
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator anim;
+
+    [SerializeField]
+    protected PlayerStat health;
+    [SerializeField]
+    protected float InitHealth = 30;
+
+    void Start()
+    {
+        //체력 초기화(현재 값, 최대 값)
+        health.Initialize(InitHealth, InitHealth);
+    }
 
     void Awake()
     {
@@ -68,13 +80,25 @@ public class PlayerMove : MonoBehaviour
             rigid.velocity = new Vector2(maxSpeed, rigid.velocity.y);
         if (rigid.velocity.x < maxSpeed*(-1)) //Left Max Speed
             rigid.velocity = new Vector2(maxSpeed * (-1), rigid.velocity.y);
-        
+
+        int xpos;
         //Landing Platform
         if (rigid.velocity.y < 0)
         {
-            Debug.DrawRay(rigid.position, Vector3.down*0.4f, new Color(0, 1, 0));
-            RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 0.4f, LayerMask.GetMask("Platform"));
-            if (rayHit.collider != null)
+            if (spriteRenderer.flipX == false)
+            
+                xpos = 1;
+            
+            else
+                xpos = -1;
+
+            Vector2 frontVec = new Vector2(rigid.position.x + xpos * 0.3f, rigid.position.y);
+            Debug.DrawRay(frontVec, Vector3.down * (0.5f), new Color(0, 1, 0));
+            RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 0.4f, LayerMask.GetMask("Platform"));
+            Debug.DrawRay(rigid.position, Vector3.down * (0.4f), new Color(0, 1, 0));
+            RaycastHit2D rayHit2 = Physics2D.Raycast(rigid.position, Vector3.down, 0.4f, LayerMask.GetMask("Platform"));
+
+            if (rayHit.collider != null || rayHit2.collider != null)
             {
                 if (rayHit.distance < 0.4f)
                     anim.SetBool("isJumping", false);
@@ -87,11 +111,20 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.layer == 10) //layer가 Enemy이면 
         {
             OnDamaged(collision.transform.position);
+
+            if(health.MyCurrentValue <= 0) //플레이어가 죽었을 때
+            {
+                Invoke("Delay", 2f);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
         }
     }
 
     void OnDamaged(Vector2 targetPos)
     {
+        //체력조절: -HP
+        health.MyCurrentValue -= 1;
+
         //Change Layer (Immortal Active)
         gameObject.layer = 12;
 
@@ -111,33 +144,8 @@ public class PlayerMove : MonoBehaviour
         spriteRenderer.color = new Color(1, 1, 1, 1);
     }
 
-    /*   void OnCollisionEnter2D(Collision2D collision)
-       {
-           Debug.Log("enter");
-           if (rayHit.collider != null)
-               GetComponent<CapsuleCollider2D>().isTrigger = false;
-           else
-               GetComponent<CapsuleCollider2D>().isTrigger = true;
-       }
-       void OnCollisionExit2D(Collision2D collision)
-       {
-           Debug.Log("exit");
-           GetComponent<CapsuleCollider2D>().isTrigger = false;
-       }
-       */
-    /*void OnTriggerEnter2D(Collider2D collision)
+    void Delay()
     {
-        GetComponent<Collision.gameObject.>
-        if()
-            GetComponent<CapsuleCollider2D>().isTrigger = false;
-        else
-        GetComponent<CapsuleCollider2D>().isTrigger = true;
+        Debug.Log("딜레이");
     }
-
-    void OnTriggerExit2D(Collider2D collision)
-    {
-        GetComponent<CapsuleCollider2D>().isTrigger = false;
-    }
-    */
-    //GetComponent<TilemapCollider2D>().isTrigger = false;
 }
