@@ -19,15 +19,17 @@ public class EnemyStat : MonoBehaviour
     public GameObject Light_Star;
 
     PlayerStat playerHP;
+    StageManager makeportal;
 
     AudioSource audioSource; // 음악플레이어
     public AudioClip twinkleSound; // 별 효과음
     public AudioClip attackSound; // 공격 효과음
 
-
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        makeportal = GameObject.Find("TransferPoint").GetComponent<StageManager>();
+
         if (gameObject.layer == 10)
         {
             currentHp = hp;
@@ -47,19 +49,20 @@ public class EnemyStat : MonoBehaviour
     {
         if (gameObject.layer == 10)
         {
-            if (currentHp <= 1)
+            if (currentHp == 1)
             {
                 //몬스터 죽음
                 audioSource.clip = attackSound; // 공격효과음
                 audioSource.Play();
 
                 StopAllCoroutines();
-                anim.SetBool("Die", true);
-                Destroy(gameObject, 0.9f);
-                GameObject lightStar = Instantiate(Light_Star);
+                anim.SetBool("Die", true); // Die 애니메이션
+                Invoke("MakePortal2", 0.9f); //몬스터 다 죽이면 다음스테이지 포탈 생성
+                Destroy(gameObject, 0.9f); // 몬스터 없앰
+                GameObject lightStar = Instantiate(Light_Star); // 별빛 효과
                 lightStar.transform.position = rigid.transform.position;
-                playerHP.MyCurrentValue += 3;
-                Destroy(lightStar, 1f);
+                playerHP.MyCurrentValue += 1; //Player hp 1 상승
+                Destroy(lightStar, 1f); //별빛 효과 없앰
             }
             else
             {
@@ -72,10 +75,10 @@ public class EnemyStat : MonoBehaviour
                 int dirc = transform.position.x - targetPos.x < 0 ? 1 : -1;
                 rigid.AddForce(new Vector2(dirc, 1) * 2, ForceMode2D.Impulse);
 
-                EnemyFloatingText(word); //데미지처럼 영어단어 띄우기
-
                 audioSource.clip = attackSound; // 공격효과음
                 audioSource.Play();
+
+                EnemyFloatingText(word); //데미지처럼 영어단어 띄우기
 
                 //몬스터 체력바 나타내기
                 healthBarFilled.fillAmount = (float)currentHp / hp;
@@ -93,14 +96,17 @@ public class EnemyStat : MonoBehaviour
             //View Alpha
             img.color = new Color(1f, 1f, 1f, 1f);
 
-             //데미지처럼 영어단어 띄우기
-            EnemyFloatingText(word);
-
             //Change Layer
             gameObject.layer = 15;
 
             audioSource.clip = twinkleSound; // 공격효과음
             audioSource.Play();
+
+            //데미지처럼 영어단어 띄우기
+            EnemyFloatingText(word);
+
+            Invoke("MakePortal2", 3f); //별 다 맞추면 다음스테이지 포탈 생성
+            Invoke("TransferScene", 6f);
         }      
     }
 
@@ -120,6 +126,8 @@ public class EnemyStat : MonoBehaviour
             clone.transform.GetChild(0).GetComponent<FloatingText>().text.text = gameObject.tag;
         //clone.GetComponent<FloatingText>().text.color = Color.red;
         //clone.GetComponent<FloatingText>().text.fontSize = 1;
+
+        Destroy(clone, 7f);
     }
 
     //몬스터 체력바 나타내기
@@ -130,4 +138,15 @@ public class EnemyStat : MonoBehaviour
         yield return new WaitForSeconds(2f);
         healthBarBackground.SetActive(false);
     }
+
+    void MakePortal2()
+    {
+        makeportal.MakePortal();
+    }
+
+    void TransferScene()
+    {
+        makeportal.Transfer();
+    }
+
 }
