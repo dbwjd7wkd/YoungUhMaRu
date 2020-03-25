@@ -57,7 +57,7 @@ public class EnemyStat : MonoBehaviour
 
                 StopAllCoroutines();
                 anim.SetBool("Die", true); // Die 애니메이션
-                Invoke("MakePortal2", 0.9f); //몬스터 다 죽이면 다음스테이지 포탈 생성
+                Invoke("MakePortal1", 0.9f); //몬스터 다 죽이면 다음스테이지 포탈 생성
                 Destroy(gameObject, 0.9f); // 몬스터 없앰
                 GameObject lightStar = Instantiate(Light_Star); // 별빛 효과
                 lightStar.transform.position = rigid.transform.position;
@@ -105,8 +105,7 @@ public class EnemyStat : MonoBehaviour
             //데미지처럼 영어단어 띄우기
             EnemyFloatingText(word);
 
-            Invoke("MakePortal2", 3f); //별 다 맞추면 다음스테이지 포탈 생성
-            Invoke("TransferScene", 6f);
+            Invoke("MakePortal_Star", 3f); //별 다 맞추면 다음스테이지 포탈 생성
         }      
     }
 
@@ -139,14 +138,14 @@ public class EnemyStat : MonoBehaviour
         healthBarBackground.SetActive(false);
     }
 
-    void MakePortal2()
+    void MakePortal()
     {
-        makeportal.MakePortal();
+        makeportal.MakePortal1();
     }
 
-    void TransferScene()
+    void MakePortal_Star()
     {
-        makeportal.Transfer();
+        makeportal.MakePortal2();
     }
 
 }

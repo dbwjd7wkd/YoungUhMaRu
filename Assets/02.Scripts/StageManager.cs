@@ -9,13 +9,24 @@ public class StageManager : MonoBehaviour
 
     public GameObject Portal;
 
-    public void MakePortal()
+    public void MakePortal1()
     {
         nextStage++;
         if (nextStage == 12)
         {
             GameObject portal = Instantiate(Portal);
             portal.transform.position = transform.position;
+        }
+    }
+
+    public void MakePortal2()
+    {
+        nextStage++;
+        if (nextStage == 12)
+        {
+            GameObject portal = Instantiate(Portal);
+            portal.transform.position = transform.position;
+            Invoke("Transfer", 6f);
         }
     }
 
