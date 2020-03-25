@@ -468,8 +468,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75cf0d5464c1b7a46871ff5eabf6531d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 8
-  currentHp: 8
+  hp: 5
+  currentHp: 5
   healthBarBackground: {fileID: 5277808792824878524}
   healthBarFilled: {fileID: 5277808792152524539}
   Light_Star: {fileID: 2189401940792912534, guid: 381b4d06b148ac141b7b127b8c04c5af,

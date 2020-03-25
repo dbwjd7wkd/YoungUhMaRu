@@ -57,7 +57,7 @@ public class EnemyStat : MonoBehaviour
 
                 StopAllCoroutines();
                 anim.SetBool("Die", true); // Die 애니메이션
-                Invoke("MakePortal1", 0.9f); //몬스터 다 죽이면 다음스테이지 포탈 생성
+                Invoke("MakePortal", 0.9f); //몬스터 다 죽이면 다음스테이지 포탈 생성
                 Destroy(gameObject, 0.9f); // 몬스터 없앰
                 GameObject lightStar = Instantiate(Light_Star); // 별빛 효과
                 lightStar.transform.position = rigid.transform.position;
