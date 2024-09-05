@@ -6,18 +6,19 @@ public class NpcSentence : MonoBehaviour
 {
     public string[] sentences;
     public Transform chatTr;
-    public GameObject chatBoxPrefab;
+    public GameObject chatBoxPrefab; // => ChatSystem.cs
+    public static GameObject go;
 
     private void Start()
     {
-        Invoke("TalkNpc", 2f);
+        Invoke("TalkNpc", 1f);
     }
 
     public void TalkNpc()
     {
-        GameObject go = Instantiate(chatBoxPrefab);
+        go = Instantiate(chatBoxPrefab);
         go.GetComponent<ChatSystem>().Ondialogue(sentences, chatTr);
-        Invoke("TalkNpc", 12f);
+        Invoke("TalkNpc", 8f);
     }
 
 }

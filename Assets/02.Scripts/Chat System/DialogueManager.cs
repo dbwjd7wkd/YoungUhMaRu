@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour, IPointerDownHandler
 {
@@ -51,8 +52,10 @@ public class DialogueManager : MonoBehaviour, IPointerDownHandler
         }
         else
         {
+            // NPC 대화가 다 끝났으면 다음 스테이지 넘어가기
             dialoguegroup.alpha = 0;
             dialoguegroup.blocksRaycasts = false;
+            SceneManager.LoadScene("Stage1-1");
         }
     }
 
@@ -79,7 +82,6 @@ public class DialogueManager : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if(!istyping)
-        NextSentence();
+        if(!istyping) NextSentence();
     }
 }
