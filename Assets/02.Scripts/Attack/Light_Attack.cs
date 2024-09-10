@@ -9,6 +9,8 @@ public class Light_Attack : MonoBehaviour
     public float distance;
     public LayerMask isLayer;
 
+    public GameObject Light_Hited;
+
     PlayerAttack Key;
 
     RaycastHit2D ray;
@@ -57,106 +59,123 @@ public class Light_Attack : MonoBehaviour
         Destroy(gameObject);
     }
 
+    string[] keyArray = { "q", "w", "e", "r", "a", "s", "d", "f", "z", "x", "c", "v" };
+    string[] tagArray = { "January", "February", "March", "April", "May", "June", 
+        "July", "August", "September", "October", "November", "December" };
+    string[] attackStringArray = { "1월", "2월", "3월", "4월", "5월", "6월", 
+        "7월", "8월", "9월", "10월", "11월", "12월" };
     IEnumerator Damaged()
     {
-                switch (Key.key)
+        switch (Key.key)
+        {
+            case "q":
+                if (ray.collider.gameObject.tag == "January")
                 {
-                    case "q":
-                        if (ray.collider.gameObject.tag == "January")
-                        {
-                            DestroyLight_Attack(); //발사체 없어짐
-                            ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "1월"); //몬스터 체력, 죽음, 데미지 관리
-                        }
-                        break;
-
-                    case "w":
-                        if (ray.collider.gameObject.tag == "February")
-                        {
-                            DestroyLight_Attack(); //발사체 없어짐
-                            ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "2월"); //몬스터 체력, 죽음, 데미지 관리
-                        }
-                        break;
-
-                    case "e":
-                        if (ray.collider.gameObject.tag == "March")
-                        {
-                            DestroyLight_Attack(); //발사체 없어짐
-                            ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "3월"); //몬스터 체력, 죽음, 데미지 관리
-                        }
-                        break;
-
-                    case "r":
-                        if (ray.collider.gameObject.tag == "April")
-                        {
-                            DestroyLight_Attack(); //발사체 없어짐
-                            ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "4월"); //몬스터 체력, 죽음, 데미지 관리
-                        }
-                        break;
-
-                    case "a":
-                        if (ray.collider.gameObject.tag == "May")
-                        {
-                            DestroyLight_Attack(); //발사체 없어짐
-                            ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "5월"); //몬스터 체력, 죽음, 데미지 관리
-                        }
-                        break;
-
-                    case "s":
-                        if (ray.collider.gameObject.tag == "June")
-                        {
-                            DestroyLight_Attack(); //발사체 없어짐
-                            ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "6월"); //몬스터 체력, 죽음, 데미지 관리
-                        }
-                        break;
-
-                    case "d":
-                        if (ray.collider.gameObject.tag == "July")
-                        {
-                            DestroyLight_Attack(); //발사체 없어짐
-                            ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "7월"); //몬스터 체력, 죽음, 데미지 관리
-                        }
-                        break;
-
-                    case "f":
-                        if (ray.collider.gameObject.tag == "August")
-                        {
-                            DestroyLight_Attack(); //발사체 없어짐
-                            ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "8월"); //몬스터 체력, 죽음, 데미지 관리
-                        }
-                        break;
-
-                    case "z":
-                        if (ray.collider.gameObject.tag == "September")
-                        {
-                            DestroyLight_Attack(); //발사체 없어짐
-                            ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "9월"); //몬스터 체력, 죽음, 데미지 관리
-                        }
-                        break;
-
-                    case "x":
-                        if (ray.collider.gameObject.tag == "October")
-                        {
-                            DestroyLight_Attack(); //발사체 없어짐
-                            ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "10월"); //몬스터 체력, 죽음, 데미지 관리
-                        }
-                        break;
-
-                    case "c":
-                        if (ray.collider.gameObject.tag == "November")
-                        {
-                            DestroyLight_Attack(); //발사체 없어짐
-                            ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "11월"); //몬스터 체력, 죽음, 데미지 관리
-                        }
-                        break;
-
-                    case "v":
-                        if (ray.collider.gameObject.tag == "December")
-                        {
-                            DestroyLight_Attack(); //발사체 없어짐
-                            ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "12월"); //몬스터 체력, 죽음, 데미지 관리
-                        }
-                        break;
+                    DestroyLight_Attack(); //발사체 없어짐
+                    ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "1월"); //몬스터 체력, 죽음, 데미지 관리
+                    GameObject lightHited = Instantiate(Light_Hited, ray.collider.gameObject.transform.position, ray.collider.gameObject.transform.rotation); // 몬스터에 맞았을 때 효과
                 }
+                break;
+
+            case "w":
+                if (ray.collider.gameObject.tag == "February")
+                {
+                    DestroyLight_Attack(); //발사체 없어짐
+                    ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "2월"); //몬스터 체력, 죽음, 데미지 관리
+                    GameObject lightHited = Instantiate(Light_Hited, ray.collider.gameObject.transform.position, ray.collider.gameObject.transform.rotation); // 몬스터에 맞았을 때 효과
+                }
+                break;
+
+            case "e":
+                if (ray.collider.gameObject.tag == "March")
+                {
+                    DestroyLight_Attack(); //발사체 없어짐
+                    ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "3월"); //몬스터 체력, 죽음, 데미지 관리
+                    GameObject lightHited = Instantiate(Light_Hited, ray.collider.gameObject.transform.position, ray.collider.gameObject.transform.rotation); // 몬스터에 맞았을 때 효과
+                }
+                break;
+
+            case "r":
+                if (ray.collider.gameObject.tag == "April")
+                {
+                    DestroyLight_Attack(); //발사체 없어짐
+                    ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "4월"); //몬스터 체력, 죽음, 데미지 관리
+                    GameObject lightHited = Instantiate(Light_Hited, ray.collider.gameObject.transform.position, ray.collider.gameObject.transform.rotation); // 몬스터에 맞았을 때 효과
+                }
+                break;
+
+            case "a":
+                if (ray.collider.gameObject.tag == "May")
+                {
+                    DestroyLight_Attack(); //발사체 없어짐
+                    ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "5월"); //몬스터 체력, 죽음, 데미지 관리
+                    GameObject lightHited = Instantiate(Light_Hited, ray.collider.gameObject.transform.position, ray.collider.gameObject.transform.rotation); // 몬스터에 맞았을 때 효과
+                }
+                break;
+
+            case "s":
+                if (ray.collider.gameObject.tag == "June")
+                {
+                    DestroyLight_Attack(); //발사체 없어짐
+                    ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "6월"); //몬스터 체력, 죽음, 데미지 관리
+                    GameObject lightHited = Instantiate(Light_Hited, ray.collider.gameObject.transform.position, ray.collider.gameObject.transform.rotation); // 몬스터에 맞았을 때 효과
+                }
+                break;
+
+            case "d":
+                if (ray.collider.gameObject.tag == "July")
+                {
+                    DestroyLight_Attack(); //발사체 없어짐
+                    ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "7월"); //몬스터 체력, 죽음, 데미지 관리
+                    GameObject lightHited = Instantiate(Light_Hited, ray.collider.gameObject.transform.position, ray.collider.gameObject.transform.rotation); // 몬스터에 맞았을 때 효과
+                }
+                break;
+
+            case "f":
+                if (ray.collider.gameObject.tag == "August")
+                {
+                    DestroyLight_Attack(); //발사체 없어짐
+                    ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "8월"); //몬스터 체력, 죽음, 데미지 관리
+                    GameObject lightHited = Instantiate(Light_Hited, ray.collider.gameObject.transform.position, ray.collider.gameObject.transform.rotation); // 몬스터에 맞았을 때 효과
+                }
+                break;
+
+            case "z":
+                if (ray.collider.gameObject.tag == "September")
+                {
+                    DestroyLight_Attack(); //발사체 없어짐
+                    ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "9월"); //몬스터 체력, 죽음, 데미지 관리
+                    GameObject lightHited = Instantiate(Light_Hited, ray.collider.gameObject.transform.position, ray.collider.gameObject.transform.rotation); // 몬스터에 맞았을 때 효과
+                }
+                break;
+
+            case "x":
+                if (ray.collider.gameObject.tag == "October")
+                {
+                    DestroyLight_Attack(); //발사체 없어짐
+                    ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "10월"); //몬스터 체력, 죽음, 데미지 관리
+                    GameObject lightHited = Instantiate(Light_Hited, ray.collider.gameObject.transform.position, ray.collider.gameObject.transform.rotation); // 몬스터에 맞았을 때 효과
+                }
+                break;
+
+            case "c":
+                if (ray.collider.gameObject.tag == "November")
+                {
+                    DestroyLight_Attack(); //발사체 없어짐
+                    ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "11월"); //몬스터 체력, 죽음, 데미지 관리
+                    GameObject lightHited = Instantiate(Light_Hited, ray.collider.gameObject.transform.position, ray.collider.gameObject.transform.rotation); // 몬스터에 맞았을 때 효과
+                }
+                break;
+
+            case "v":
+                if (ray.collider.gameObject.tag == "December")
+                {
+                    DestroyLight_Attack(); //발사체 없어짐
+                    ray.collider.gameObject.GetComponent<EnemyStat>().EnemyDamaged(transform.position, "12월"); //몬스터 체력, 죽음, 데미지 관리
+                    GameObject lightHited = Instantiate(Light_Hited, ray.collider.gameObject.transform.position, ray.collider.gameObject.transform.rotation); // 몬스터에 맞았을 때 효과
+                }
+                break;
+        }
         yield return new WaitForSecondsRealtime(Time.timeScale);
     }
 }

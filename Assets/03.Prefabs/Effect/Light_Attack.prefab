@@ -4708,6 +4708,7 @@ MonoBehaviour:
   isLayer:
     serializedVersion: 2
     m_Bits: 17920
+  Light_Hited: {fileID: 100000, guid: 131c873f45797a849a3aa3370c93a3ed, type: 3}
 --- !u!58 &929292864
 CircleCollider2D:
   m_ObjectHideFlags: 0
