@@ -81,6 +81,7 @@
     <Compile Include="Assets\02.Scripts\PlayerMove.cs" />
     <Compile Include="Assets\02.Scripts\PlayerStat.cs" />
     <Compile Include="Assets\02.Scripts\StageManager.cs" />
+    <Compile Include="Assets\02.Scripts\UI\Canvas_Quit_Event.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_New.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RandomDir.cs" />

@@ -59,11 +59,6 @@ public class Light_Attack : MonoBehaviour
         Destroy(gameObject);
     }
 
-    string[] keyArray = { "q", "w", "e", "r", "a", "s", "d", "f", "z", "x", "c", "v" };
-    string[] tagArray = { "January", "February", "March", "April", "May", "June", 
-        "July", "August", "September", "October", "November", "December" };
-    string[] attackStringArray = { "1월", "2월", "3월", "4월", "5월", "6월", 
-        "7월", "8월", "9월", "10월", "11월", "12월" };
     IEnumerator Damaged()
     {
         switch (Key.key)
